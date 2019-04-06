@@ -1,0 +1,44 @@
+---
+title: "Analysing FARS data"
+author: "Utkarsh Phirke <utkarshphirke1@gmail.com>"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Analysing FARS data}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+This vignette will walk you through loading the Fatality Analysis Reporting System (FARS) datasets and performing a basic analysis.
+
+## Read data
+
+The function fars_read_years return a list of tibbles for the vector of years specified. Each fatality results in one row in this tibble.
+
+```{r}
+library(fars)
+fars_read_years(c(2013, 2014))
+```
+
+## Summarise fatalities by month
+
+The `fars_summarise_years` function provides the count of fatalities for the years.
+ 
+```{r}
+fars_summarize_years(c(2013,2014))
+```
+
+## Plot fatalities on the map
+
+The `fars_map_state` function plots the fatalities for a given state and year on the map using the geo coordinates of the accident. The following is the map for the state of Alabama. The index of state is in alphabetical order. It can be found using the base `state.name`.
+
+```{r}
+fars_map_state(1, 2013)
+```
