@@ -6,3 +6,12 @@ fars
 ====
 
 The goal of fars is to enable analysis on the Fatality Analysis Reporting System (FARS) datasets.
+
+Install from github
+-------------------
+
+You can install this package using devtools.
+
+``` r
+devtools::install_github('utkarshphirke/fars', build_vignettes)
+```
