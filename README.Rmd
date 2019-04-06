@@ -4,6 +4,9 @@ output: github_document
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
+[![Build Status](https://travis-ci.org/utkarshphirke/fars.svg?branch=master)](https://travis-ci.org/utkarshphirke/fars)
+[![Build status](https://ci.appveyor.com/api/projects/status/5ko1tqvtsah53nmg?svg=true)](https://ci.appveyor.com/project/utkarshphirke/fars)
+
 ```{r setup, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
