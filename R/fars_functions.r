@@ -1,3 +1,6 @@
+## quiets concerns of R CMD check re: the .'s that appear in pipelines
+if(getRversion() >= "2.15.1")  utils::globalVariables(c("."))
+
 #' Read a FARS dataset
 #'
 #' This function reads the specified file and returns a tibble containing the FARS data
@@ -10,6 +13,8 @@
 #'
 #' @importFrom readr read_csv
 #' @importFrom  dplyr tbl_df
+#' @export
+#'
 #' @examples
 #' \dontrun{
 #' fars_read('accident_2013.csv.bz2')
@@ -31,6 +36,8 @@ fars_read <- function(filename) {
 #'
 #' @return Filename of the FARS dataset for the corresponding year
 #' @details
+#'
+#' @export
 #'
 #' @examples
 #' make_filename(2013)
@@ -60,12 +67,11 @@ make_filename <- function(year) {
 #' fars_read_years(c(2013, 2014, 2015))
 #' }
 fars_read_years <- function(years) {
-        library(magrittr)
         lapply(years, function(year) {
                 file <- make_filename(year)
                 tryCatch({
                         dat <- fars_read(file)
-                        dplyr::mutate(dat, year = YEAR) %>%
+                        dplyr::mutate(dat, year = YEAR)  %>%
                                 dplyr::select(MONTH, year)
                 }, error = function(e) {
                         warning("invalid year: ", year, '\n')
@@ -96,11 +102,10 @@ fars_read_years <- function(years) {
 #' }
 #'
 fars_summarize_years <- function(years) {
-  library(magrittr)
         dat_list <- fars_read_years(years)
         dplyr::bind_rows(dat_list) %>%
-                dplyr::group_by(year, MONTH) %>%
-                dplyr::summarize(n = n()) %>%
+                dplyr::group_by(year, MONTH)  %>%
+                dplyr::summarize(n = n())   %>%
                 tidyr::spread(year, n, sep = '_')
 }
 
